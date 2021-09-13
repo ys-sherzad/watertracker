@@ -5,16 +5,18 @@ import Text from '../../common/Text.component';
 interface LabelProps {
     value: number;
     description: string;
+    unit?: string;
 }
 
 const Label = ({
     value,
-    description
+    description,
+    unit
 }: LabelProps) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.value}>{value}</Text>
-            <Text style={styles.desc}>{description}</Text>
+            <Text style={styles.value}>{value} {unit ?? ''}</Text>
+            <Text style={styles.desc}>{description.toUpperCase()}</Text>
         </View>
     );
 };
@@ -26,10 +28,14 @@ const styles = StyleSheet.create({
         // backgroundColor: 'yellow'
     },
     value: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 28,
+        fontWeight: '700'
     },
     desc: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 14,
+        marginTop: 5
     }
 
 });

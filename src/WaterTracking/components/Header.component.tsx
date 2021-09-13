@@ -8,8 +8,15 @@ interface HeaderProps { }
 const Header = (props: HeaderProps) => {
     return (
         <View style={styles.container}>
-            <Label value={2.4} description={constants.total_water_drunk} />
-            <Label value={15} description={constants.achieved_goal_days} />
+            <Label
+                unit='L'
+                value={2.4}
+                description={constants.total_water_drunk}
+            />
+            <Label
+                value={15}
+                description={constants.achieved_goal_days}
+            />
         </View>
     );
 };
@@ -22,6 +29,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // backgroundColor: 'purple'
+        paddingHorizontal: 20
     }
 });
