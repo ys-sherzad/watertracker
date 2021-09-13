@@ -16,6 +16,7 @@ import {
   Text,
 
 } from 'react-native';
+import { Theme } from './src/utils';
 import WaterTracking from './src/WaterTracking';
 
 const App = () => {
@@ -30,7 +31,7 @@ const App = () => {
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
-    backgroundColor: '#eee',
+    backgroundColor: Theme.primary,
   }
 });
 

@@ -23,7 +23,7 @@ export default Label;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'yellow'
+        // backgroundColor: 'yellow'
     },
     value: {
         textAlign: 'center'
