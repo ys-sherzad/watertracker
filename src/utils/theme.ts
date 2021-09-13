@@ -1,4 +1,5 @@
 export const theme = {
     primary: '#52BFEF',
-    text: '#fff'
+    text: '#fff',
+    icon: '#fff'
 };
