@@ -30,7 +30,7 @@ const Footer = (props: FooterProps) => {
         </View>
     );
 
-    const renderButtonActions = () => (
+    const renderActionButtons = () => (
         <View style={styles.btnsContainer}>
             <MinusCircle width={ICON_SIZE} height={ICON_SIZE} color={Theme.icon} />
             <Spacer size={20} horizontal />
@@ -41,7 +41,7 @@ const Footer = (props: FooterProps) => {
     return (
         <View style={styles.container}>
             {renderLevels()}
-            {renderButtonActions()}
+            {renderActionButtons()}
         </View>
     );
 };
@@ -50,7 +50,7 @@ export default Footer;
 
 const styles = StyleSheet.create({
     container: {
-        height: 140,
+        height: 150,
     },
     levelsContainer: {
         flex: 1,
