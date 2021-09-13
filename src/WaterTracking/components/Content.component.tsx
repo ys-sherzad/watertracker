@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { constants } from '../../common/strings';
 import Text from '../../common/Text.component';
@@ -6,6 +6,7 @@ import Figure from '../../../assets/human-figure.svg';
 import { Theme } from '../../utils';
 import Button from '../../common/Button.component';
 import { Edit2 } from 'react-native-feather';
+import UpdateTarget from './UpdateTarget.modal';
 
 const FIGURE_CONTAINER_WIDTH = 220;
 const FIGURE_HEIGHT = 354;
@@ -19,6 +20,10 @@ const FIGURE_LEFT_OFFSET = FIGURE_CONTAINER_WIDTH - FIGURE_WIDTH;
 interface ContentProps { };
 
 const Content = (props: ContentProps) => {
+    const [visible, setVisible] = useState(false);
+
+    const dismissModal = () => setVisible(false);
+
     return (
         <View style={styles.container}>
             <View style={styles.humanGraphContainer}>
@@ -41,7 +46,7 @@ const Content = (props: ContentProps) => {
                     </View>
 
                     <Button
-                        onPress={() => console.log('PRESSED')}
+                        onPress={() => setVisible(true)}
                         style={styles.targetBtn}
                     >
                         <Text style={styles.target}>3.5 L</Text>
@@ -54,6 +59,11 @@ const Content = (props: ContentProps) => {
             <View style={styles.bottomContainer}>
                 <Text style={styles.note}>{constants.nice_work}</Text>
             </View>
+
+            <UpdateTarget
+                visible={visible}
+                onDismiss={dismissModal}
+            />
         </View>
     );
 };
