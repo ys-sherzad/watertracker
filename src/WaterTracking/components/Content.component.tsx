@@ -3,42 +3,50 @@ import { View, StyleSheet } from 'react-native';
 import { constants } from '../../common/strings';
 import Text from '../../common/Text.component';
 import Figure from '../../../assets/human-figure.svg';
+import { Theme } from '../../utils';
+import Button from '../../common/Button.component';
+import { Edit2 } from 'react-native-feather';
 
-interface ContentProps { }
+const FIGURE_CONTAINER_WIDTH = 220;
+const FIGURE_HEIGHT = 354;
+const FIGURE_WIDTH = 157;
+const ASPECT_RATIO = FIGURE_WIDTH / FIGURE_HEIGHT;
+const OVERLAY_HEIGHT = 348;
+const OVERLAY_WIDTH = 151;
+
+const FIGURE_LEFT_OFFSET = FIGURE_CONTAINER_WIDTH - FIGURE_WIDTH;
+
+interface ContentProps { };
 
 const Content = (props: ContentProps) => {
     return (
         <View style={styles.container}>
             <View style={styles.humanGraphContainer}>
                 <View style={{
-                    width: 250,
-                    backgroundColor: 'purple',
+                    width: FIGURE_CONTAINER_WIDTH,
+                    marginLeft: FIGURE_LEFT_OFFSET,
                     overflow: 'hidden',
-                    marginLeft: 93,
                 }}>
                     <View style={{
-                        aspectRatio: 157 / 344,
-                        height: 354,
-                        width: 157,
-                        backgroundColor: 'yellow',
+                        aspectRatio: ASPECT_RATIO,
+                        height: FIGURE_HEIGHT,
+                        width: FIGURE_WIDTH,
                     }}>
                         <Figure
                             height='100%'
                             width='100%'
                             preserveAspectRatio='xMinYMin slice'
                         />
-                        <View style={{
-                            position: 'absolute',
-                            zIndex: 0,
-                            backgroundColor: 'blue',
-                            height: 348,
-                            width: 151,
-                            top: 3,
-                            transform: [{
-                                translateY: 354
-                            }]
-                        }} />
+                        <View style={styles.overlay} />
                     </View>
+
+                    <Button
+                        onPress={() => console.log('PRESSED')}
+                        style={styles.targetBtn}
+                    >
+                        <Text style={styles.target}>3.5 L</Text>
+                        <Edit2 width={12} height={12} color={Theme.icon} />
+                    </Button>
                 </View>
             </View>
 
@@ -58,16 +66,39 @@ const styles = StyleSheet.create({
     },
     humanGraphContainer: {
         flex: 1,
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center'
     },
     bottomContainer: {
-        paddingVertical: 18
+        paddingBottom: 28
     },
     note: {
         fontSize: 18,
         textAlign: 'center',
         fontWeight: '600'
+    },
+    overlay: {
+        position: 'absolute',
+        zIndex: -1,
+        backgroundColor: Theme.secondary,
+        height: OVERLAY_HEIGHT,
+        width: OVERLAY_WIDTH,
+        top: 4,
+        transform: [{
+            translateY: 100
+        }]
+    },
+    targetBtn: {
+        position: 'absolute',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 5,
+        top: -7,
+        right: 0
+    },
+    target: {
+        fontSize: 16,
+        marginRight: 5
     }
 });
