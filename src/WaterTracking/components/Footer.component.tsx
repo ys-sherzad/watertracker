@@ -4,6 +4,7 @@ import Text from '../../common/Text.component';
 import { PlusCircle, MinusCircle } from 'react-native-feather';
 import { Theme } from '../../utils';
 import Spacer from '../../common/Spacer.component';
+import Button from '../../common/Button.component';
 
 interface FooterProps { }
 
@@ -18,13 +19,15 @@ const Footer = (props: FooterProps) => {
             {levels.map((level, index) => {
                 const hasSpacer = levels.length - 1 !== index;
                 return (
-                    <>
-                        <Text style={styles.level}>
-                            {level} ml
-                        </Text>
+                    <React.Fragment key={level}>
+                        <Button style={{ padding: 8 }} onPress={() => console.log(level)}>
+                            <Text style={styles.level}>
+                                {level} ml
+                            </Text>
+                        </Button>
 
                         {hasSpacer && <Spacer size={30} horizontal />}
-                    </>
+                    </React.Fragment>
                 );
             })}
         </View>
@@ -32,9 +35,13 @@ const Footer = (props: FooterProps) => {
 
     const renderActionButtons = () => (
         <View style={styles.btnsContainer}>
-            <MinusCircle width={ICON_SIZE} height={ICON_SIZE} color={Theme.icon} />
+            <Button onPress={() => console.log('DECREMENT!')}>
+                <MinusCircle width={ICON_SIZE} height={ICON_SIZE} color={Theme.icon} />
+            </Button>
             <Spacer size={20} horizontal />
-            <PlusCircle width={ICON_SIZE} height={ICON_SIZE} color={Theme.icon} />
+            <Button onPress={() => console.log('INCREMENT!')}>
+                <PlusCircle width={ICON_SIZE} height={ICON_SIZE} color={Theme.icon} />
+            </Button>
         </View>
     );
 
