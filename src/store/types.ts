@@ -22,7 +22,7 @@ export type AppAction =
 export interface State {
     totalWaterDrunk: number;
     target: number;
-    selectedValue: number;
+    selectedValueIndex: number;
 }
 
 

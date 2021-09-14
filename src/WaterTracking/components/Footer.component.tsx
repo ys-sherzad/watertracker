@@ -7,12 +7,11 @@ import Spacer from '../../common/Spacer.component';
 import Button from '../../common/Button.component';
 import { useStore } from '../../provider/StoreContext';
 import { decrement, increment, selectWaterValue } from '../../store/actions';
+import { levels } from '../../store/data';
 
 const ICON_SIZE = 55;
 
 interface FooterProps { }
-
-const levels = [150, 250, 350];
 
 const Footer = (props: FooterProps) => {
     const { store, dispatch } = useStore();
@@ -21,15 +20,15 @@ const Footer = (props: FooterProps) => {
         <View style={styles.levelsContainer}>
             {levels.map((value, index) => {
                 const hasSpacer = levels.length - 1 !== index;
-                const isSelected = value === store.selectedValue;
+                const isSelected = index === store.selectedValueIndex;
                 return (
                     <React.Fragment key={value}>
                         <Button
                             style={{ padding: 8 }}
-                            onPress={() => dispatch(selectWaterValue(value))}
+                            onPress={() => dispatch(selectWaterValue(index))}
                         >
                             <Text style={[styles.level, !isSelected && { color: Theme.inactive }]}>
-                                {value} ml
+                                {levels[index]} ml
                             </Text>
                         </Button>
 

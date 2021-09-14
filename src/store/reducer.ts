@@ -1,10 +1,10 @@
-import { Helpers } from "../utils";
+import { levels } from "./data";
 import { ActionType, AppAction, State } from "./types";
 
 export const initialState: State = {
     totalWaterDrunk: 0,
     target: 2500,
-    selectedValue: 250
+    selectedValueIndex: 1
 };
 
 export const reducer = (state: State, action: AppAction) => {
@@ -17,13 +17,13 @@ export const reducer = (state: State, action: AppAction) => {
         case ActionType.SELECT_WATER_VALUE:
             return {
                 ...state,
-                selectedValue: action.payload,
+                selectedValueIndex: action.payload,
             };
         case ActionType.INCREMENT:
             return {
                 ...state,
                 totalWaterDrunk: function () {
-                    const total = state.totalWaterDrunk + state.selectedValue;
+                    const total = state.totalWaterDrunk + levels[state.selectedValueIndex];
                     if (total > state.target) {
                         return state.target;
                     }
@@ -34,7 +34,7 @@ export const reducer = (state: State, action: AppAction) => {
             return {
                 ...state,
                 totalWaterDrunk: function () {
-                    const total = state.totalWaterDrunk - state.selectedValue;
+                    const total = state.totalWaterDrunk - levels[state.selectedValueIndex];
                     if (total < 0) {
                         return 0;
                     }
