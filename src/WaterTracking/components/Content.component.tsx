@@ -8,6 +8,7 @@ import Button from '../../common/Button.component';
 import { Edit2 } from 'react-native-feather';
 import UpdateTarget from './UpdateTarget.modal';
 import { useStore } from '../../provider/StoreContext';
+import { setWaterTarget } from '../../store/actions';
 
 const FIGURE_CONTAINER_WIDTH = 220;
 const FIGURE_HEIGHT = 354;
@@ -21,13 +22,20 @@ const FIGURE_LEFT_OFFSET = FIGURE_CONTAINER_WIDTH - FIGURE_WIDTH;
 interface ContentProps { };
 
 const Content = (props: ContentProps) => {
+
     const [visible, setVisible] = useState(false);
 
-    const { store } = useStore();
+    const { store, dispatch } = useStore();
 
     const dismissModal = () => setVisible(false);
 
+    /**
+     * Update target in store
+     * @param value string
+     */
     const updateTargetValue = (value: string) => {
+        dispatch(setWaterTarget(Number(value)));
+        dismissModal();
     };
 
     console.log({ store });
@@ -57,7 +65,7 @@ const Content = (props: ContentProps) => {
                         onPress={() => setVisible(true)}
                         style={styles.targetBtn}
                     >
-                        <Text style={styles.target}>3.5 L</Text>
+                        <Text style={styles.target}>{store.target} L</Text>
                         <Edit2 width={12} height={12} color={Theme.icon} />
                     </Button>
                 </View>

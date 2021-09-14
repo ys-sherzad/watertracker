@@ -1,3 +1,4 @@
+import { Helpers } from "../utils";
 import { ActionType, AppAction, State } from "./types";
 
 export const initialState: State = {
@@ -10,7 +11,7 @@ export const reducer = (state: State, action: AppAction) => {
         case ActionType.SET_WATER_TARGET:
             return {
                 ...state,
-                target: action.payload
+                target: Helpers.mililiterToLiter(action.payload)
             };
         default:
             return state;
