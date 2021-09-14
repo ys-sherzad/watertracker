@@ -9,6 +9,11 @@ export const mililiterToLiter = (value: number) => {
     return toFixed(inLiter);
 };
 
+/**
+ * Fixes to 2 decimal numbers
+ * @param num 
+ * @returns fixed decimal
+ */
 export const toFixed = (num: number) => {
     if (Math.abs(num) < 1.0) {
         var e = parseInt(num.toString().split('e-')[1]);

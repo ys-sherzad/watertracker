@@ -16,13 +16,16 @@ import {
 import { Theme } from './src/utils';
 import WaterTracking from './src/WaterTracking';
 import StoreProvider from './src/provider/StoreProvider';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const App = () => {
 
   return (
     <StoreProvider>
       <SafeAreaView style={styles.safeAreaView}>
-        <WaterTracking />
+        <GestureHandlerRootView style={styles.flexOne}>
+          <WaterTracking />
+        </GestureHandlerRootView>
       </SafeAreaView>
     </StoreProvider>
   );
@@ -32,6 +35,9 @@ const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
     backgroundColor: Theme.primary,
+  },
+  flexOne: {
+    flex: 1
   }
 });
 
