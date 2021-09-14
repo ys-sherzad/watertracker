@@ -3,7 +3,7 @@ import { ActionType, AppAction, State } from "./types";
 
 export const initialState: State = {
     totalWaterDrunk: 0,
-    target: 2500,
+    target: 3500,
     selectedValueIndex: 1
 };
 

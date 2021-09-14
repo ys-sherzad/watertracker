@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { constants } from '../../common/strings';
 import Text from '../../common/Text.component';
@@ -21,11 +21,23 @@ const FIGURE_LEFT_OFFSET = FIGURE_CONTAINER_WIDTH - FIGURE_WIDTH;
 
 interface ContentProps { };
 
-const Content = (props: ContentProps) => {
-
-    const [visible, setVisible] = useState(false);
+const Content = ({ }: ContentProps) => {
 
     const { store, dispatch } = useStore();
+
+    const [visible, setVisible] = useState(false);
+    const [offsetY, setOffsetY] = useState(OVERLAY_HEIGHT);
+
+
+    useEffect(() => {
+        const { totalWaterDrunk, target } = store;
+
+        // calculate graph background offset for y-axis
+        const offsetY = (totalWaterDrunk * OVERLAY_HEIGHT) / target;
+
+        setOffsetY(OVERLAY_HEIGHT - offsetY);
+    }, [store.totalWaterDrunk]);
+
 
     const dismissModal = () => setVisible(false);
 
@@ -38,16 +50,10 @@ const Content = (props: ContentProps) => {
         dismissModal();
     };
 
-    console.log({ store });
-
     return (
-        <View style={styles.container}>
-            <View style={styles.humanGraphContainer}>
-                <View style={{
-                    width: FIGURE_CONTAINER_WIDTH,
-                    marginLeft: FIGURE_LEFT_OFFSET,
-                    overflow: 'hidden',
-                }}>
+        <View style={styles.flexOne}>
+            <View style={styles.graphOuterContainer}>
+                <View style={styles.graphInnerContainer}>
                     <View style={{
                         aspectRatio: ASPECT_RATIO,
                         height: FIGURE_HEIGHT,
@@ -58,7 +64,11 @@ const Content = (props: ContentProps) => {
                             width='100%'
                             preserveAspectRatio='xMinYMin slice'
                         />
-                        <View style={styles.overlay} />
+                        <View style={[styles.overlay, {
+                            transform: [{
+                                translateY: offsetY
+                            }]
+                        }]} />
                     </View>
 
                     <Button
@@ -88,14 +98,18 @@ const Content = (props: ContentProps) => {
 export default Content;
 
 const styles = StyleSheet.create({
-    container: {
+    flexOne: {
         flex: 1,
     },
-    humanGraphContainer: {
+    graphOuterContainer: {
         flex: 1,
-        // backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    graphInnerContainer: {
+        width: FIGURE_CONTAINER_WIDTH,
+        marginLeft: FIGURE_LEFT_OFFSET,
+        overflow: 'hidden',
     },
     bottomContainer: {
         paddingBottom: 28
@@ -112,9 +126,6 @@ const styles = StyleSheet.create({
         height: OVERLAY_HEIGHT,
         width: OVERLAY_WIDTH,
         top: 4,
-        transform: [{
-            translateY: 100
-        }]
     },
     targetBtn: {
         position: 'absolute',
