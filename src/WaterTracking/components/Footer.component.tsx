@@ -5,24 +5,31 @@ import { PlusCircle, MinusCircle } from 'react-native-feather';
 import { Theme } from '../../utils';
 import Spacer from '../../common/Spacer.component';
 import Button from '../../common/Button.component';
+import { useStore } from '../../provider/StoreContext';
+import { decrement, increment, selectWaterValue } from '../../store/actions';
+
+const ICON_SIZE = 55;
 
 interface FooterProps { }
 
 const levels = [150, 250, 350];
 
-const ICON_SIZE = 55;
-
 const Footer = (props: FooterProps) => {
+    const { store, dispatch } = useStore();
 
     const renderLevels = () => (
         <View style={styles.levelsContainer}>
-            {levels.map((level, index) => {
+            {levels.map((value, index) => {
                 const hasSpacer = levels.length - 1 !== index;
+                const isSelected = value === store.selectedValue;
                 return (
-                    <React.Fragment key={level}>
-                        <Button style={{ padding: 8 }} onPress={() => console.log(level)}>
-                            <Text style={styles.level}>
-                                {level} ml
+                    <React.Fragment key={value}>
+                        <Button
+                            style={{ padding: 8 }}
+                            onPress={() => dispatch(selectWaterValue(value))}
+                        >
+                            <Text style={[styles.level, !isSelected && { color: Theme.inactive }]}>
+                                {value} ml
                             </Text>
                         </Button>
 
@@ -35,11 +42,11 @@ const Footer = (props: FooterProps) => {
 
     const renderActionButtons = () => (
         <View style={styles.btnsContainer}>
-            <Button onPress={() => console.log('DECREMENT!')}>
+            <Button onPress={() => dispatch(decrement())}>
                 <MinusCircle width={ICON_SIZE} height={ICON_SIZE} color={Theme.icon} />
             </Button>
             <Spacer size={20} horizontal />
-            <Button onPress={() => console.log('INCREMENT!')}>
+            <Button onPress={() => dispatch(increment())}>
                 <PlusCircle width={ICON_SIZE} height={ICON_SIZE} color={Theme.icon} />
             </Button>
         </View>

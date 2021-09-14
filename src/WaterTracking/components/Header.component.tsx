@@ -1,16 +1,19 @@
-import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import { constants } from '../../common/strings';
+import { useStore } from '../../provider/StoreContext';
+import { Helpers } from '../../utils';
 import Label from './Label.component';
 
 interface HeaderProps { }
 
 const Header = (props: HeaderProps) => {
+    const { store } = useStore();
     return (
         <View style={styles.container}>
             <Label
                 unit='L'
-                value={2.4}
+                value={Helpers.mililiterToLiter(store.totalWaterDrunk)}
                 description={constants.total_water_drunk}
             />
             <Label

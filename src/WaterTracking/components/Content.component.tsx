@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { constants } from '../../common/strings';
 import Text from '../../common/Text.component';
 import Figure from '../../../assets/human-figure.svg';
-import { Theme } from '../../utils';
+import { Helpers, Theme } from '../../utils';
 import Button from '../../common/Button.component';
 import { Edit2 } from 'react-native-feather';
 import UpdateTarget from './UpdateTarget.modal';
@@ -65,7 +65,7 @@ const Content = (props: ContentProps) => {
                         onPress={() => setVisible(true)}
                         style={styles.targetBtn}
                     >
-                        <Text style={styles.target}>{store.target} L</Text>
+                        <Text style={styles.target}>{Helpers.mililiterToLiter(store.target)} L</Text>
                         <Edit2 width={12} height={12} color={Theme.icon} />
                     </Button>
                 </View>
