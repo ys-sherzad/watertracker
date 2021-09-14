@@ -11,11 +11,13 @@ import { X } from 'react-native-feather';
 interface UpdateTargetProps {
     visible: boolean;
     onDismiss: () => void;
+    onUpdate: (text: string) => void;
 }
 
 const UpdateTarget = ({
     visible,
-    onDismiss
+    onDismiss,
+    onUpdate
 }: UpdateTargetProps) => {
 
     const [newTarget, setNewTarget] = useState('');
@@ -52,7 +54,7 @@ const UpdateTarget = ({
                 <Spacer size={12} />
 
                 <Button
-                    onPress={() => console.log('PRESSED')}
+                    onPress={() => onUpdate(newTarget)}
                     style={styles.updateBtn}>
                     <Text style={styles.update}>{constants.update.toUpperCase()}</Text>
                 </Button>

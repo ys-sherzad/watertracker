@@ -7,6 +7,7 @@ import { Theme } from '../../utils';
 import Button from '../../common/Button.component';
 import { Edit2 } from 'react-native-feather';
 import UpdateTarget from './UpdateTarget.modal';
+import { useStore } from '../../provider/StoreContext';
 
 const FIGURE_CONTAINER_WIDTH = 220;
 const FIGURE_HEIGHT = 354;
@@ -22,7 +23,14 @@ interface ContentProps { };
 const Content = (props: ContentProps) => {
     const [visible, setVisible] = useState(false);
 
+    const { store } = useStore();
+
     const dismissModal = () => setVisible(false);
+
+    const updateTargetValue = (value: string) => {
+    };
+
+    console.log({ store });
 
     return (
         <View style={styles.container}>
@@ -63,6 +71,7 @@ const Content = (props: ContentProps) => {
             <UpdateTarget
                 visible={visible}
                 onDismiss={dismissModal}
+                onUpdate={updateTargetValue}
             />
         </View>
     );

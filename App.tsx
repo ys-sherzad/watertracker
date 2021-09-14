@@ -11,20 +11,20 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StatusBar,
   StyleSheet,
-  Text,
-
 } from 'react-native';
 import { Theme } from './src/utils';
 import WaterTracking from './src/WaterTracking';
+import StoreProvider from './src/provider/StoreProvider';
 
 const App = () => {
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      <WaterTracking />
-    </SafeAreaView>
+    <StoreProvider>
+      <SafeAreaView style={styles.safeAreaView}>
+        <WaterTracking />
+      </SafeAreaView>
+    </StoreProvider>
   );
 };
 
