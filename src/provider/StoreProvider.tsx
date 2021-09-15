@@ -1,6 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import useStartup from '../hooks/useStartup';
+import { Theme } from '../utils';
 import { Provider } from './StoreContext';
 
 interface StoreProviderProps {
@@ -17,8 +18,13 @@ const StoreProvider = ({
 
     if (isLoading) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size='large' color='#088ECF' />
+            <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: Theme.primary
+            }}>
+                <ActivityIndicator size='large' color='#fff' />
             </View>
         );
     }
