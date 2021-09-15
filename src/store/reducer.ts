@@ -10,6 +10,13 @@ export const initialState: State = {
 export const reducer = (state: State, action: AppAction) => {
     switch (action.type) {
         case ActionType.SET_WATER_TARGET:
+            if (action.payload < state.totalWaterDrunk) {
+                return {
+                    ...state,
+                    target: action.payload,
+                    totalWaterDrunk: action.payload
+                };
+            }
             return {
                 ...state,
                 target: action.payload

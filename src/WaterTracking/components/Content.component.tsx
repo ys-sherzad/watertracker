@@ -41,7 +41,7 @@ const Content = ({ }: ContentProps) => {
 
     useEffect(() => {
         setOffsetValue();
-    }, [store.totalWaterDrunk]);
+    }, [store.totalWaterDrunk, store.target]);
 
     /**
      * Calculate graph background offset for y-axis
@@ -49,7 +49,7 @@ const Content = ({ }: ContentProps) => {
     const setOffsetValue = () => {
         const { totalWaterDrunk, target } = store;
 
-        const offset = (totalWaterDrunk * OVERLAY_HEIGHT) / target;
+        const offset = (OVERLAY_HEIGHT * totalWaterDrunk) / target;
 
         YValue.value = (OVERLAY_HEIGHT - offset);
     };
