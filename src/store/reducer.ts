@@ -48,6 +48,8 @@ export const reducer = (state: State, action: AppAction) => {
                     return total;
                 }()
             };
+        case ActionType.REHYDRATE:
+            return action.payload;
         default:
             return state;
     }

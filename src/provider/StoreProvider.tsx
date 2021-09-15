@@ -1,5 +1,6 @@
-import React, { useReducer } from 'react';
-import { initialState, reducer } from '../store/reducer';
+import React from 'react';
+import { ActivityIndicator, View } from 'react-native';
+import useStartup from '../hooks/useStartup';
 import { Provider } from './StoreContext';
 
 interface StoreProviderProps {
@@ -12,7 +13,16 @@ interface StoreProviderProps {
 const StoreProvider = ({
     children
 }: StoreProviderProps) => {
-    const [store, dispatch] = useReducer(reducer, initialState);
+    const { isLoading, store, dispatch } = useStartup();
+
+    if (isLoading) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size='large' color='#088ECF' />
+            </View>
+        );
+    }
+
     return (
         <Provider value={{ store, dispatch }}>
             {children}

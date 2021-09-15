@@ -1,5 +1,5 @@
 import { createAction } from "./createAction";
-import { ActionType, AppAction } from "./types";
+import { ActionType, AppAction, State } from "./types";
 
 /**
  * @param value number
@@ -23,3 +23,6 @@ export const increment = (): AppAction =>
 
 export const decrement = (): AppAction =>
     createAction(ActionType.DECREMENT, undefined);
+
+export const rehydrate = (state: State): AppAction =>
+    createAction(ActionType.REHYDRATE, state);
