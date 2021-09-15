@@ -24,7 +24,7 @@ const Footer = (props: FooterProps) => {
                 return (
                     <React.Fragment key={value}>
                         <Button
-                            style={{ padding: 8 }}
+                            style={{ padding: 8, borderRadius: 5 }}
                             onPress={() => dispatch(selectWaterValue(index))}
                         >
                             <Text style={[styles.level, !isSelected && { color: Theme.inactive }]}>
@@ -41,11 +41,11 @@ const Footer = (props: FooterProps) => {
 
     const renderActionButtons = () => (
         <View style={styles.btnsContainer}>
-            <Button onPress={() => dispatch(decrement())}>
+            <Button onPress={() => dispatch(decrement())} style={styles.btn}>
                 <MinusCircle width={ICON_SIZE} height={ICON_SIZE} color={Theme.icon} />
             </Button>
             <Spacer size={20} horizontal />
-            <Button onPress={() => dispatch(increment())}>
+            <Button onPress={() => dispatch(increment())} style={styles.btn}>
                 <PlusCircle width={ICON_SIZE} height={ICON_SIZE} color={Theme.icon} />
             </Button>
         </View>
@@ -81,5 +81,15 @@ const styles = StyleSheet.create({
     level: {
         fontSize: 20,
         fontWeight: '700'
+    },
+    btn: {
+        borderRadius: 99
+
+
+
+
+
+
+
     }
 });
