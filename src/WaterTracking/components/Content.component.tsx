@@ -9,6 +9,12 @@ import { Edit2 } from 'react-native-feather';
 import UpdateTarget from './UpdateTarget.modal';
 import { useStore } from '../../provider/StoreContext';
 import { setWaterTarget } from '../../store/actions';
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withTiming,
+    Easing,
+} from 'react-native-reanimated';
 
 const FIGURE_CONTAINER_WIDTH = 220;
 const FIGURE_HEIGHT = 354;
@@ -19,23 +25,42 @@ const OVERLAY_WIDTH = 151;
 
 const FIGURE_LEFT_OFFSET = FIGURE_CONTAINER_WIDTH - FIGURE_WIDTH;
 
+const animationConfig = {
+    duration: 300,
+    easing: Easing.inOut(Easing.cubic)
+};
+
 interface ContentProps { };
 
 const Content = ({ }: ContentProps) => {
+    const YValue = useSharedValue(OVERLAY_HEIGHT);
 
     const { store, dispatch } = useStore();
 
     const [visible, setVisible] = useState(false);
-    const [offsetY, setOffsetY] = useState(OVERLAY_HEIGHT);
 
     useEffect(() => {
+        setOffsetValue();
+    }, [store.totalWaterDrunk]);
+
+    /**
+     * Calculate graph background offset for y-axis
+     */
+    const setOffsetValue = () => {
         const { totalWaterDrunk, target } = store;
 
-        // calculate graph background offset for y-axis
-        const offsetY = (totalWaterDrunk * OVERLAY_HEIGHT) / target;
+        const offset = (totalWaterDrunk * OVERLAY_HEIGHT) / target;
 
-        setOffsetY(OVERLAY_HEIGHT - offsetY);
-    }, [store.totalWaterDrunk]);
+        YValue.value = (OVERLAY_HEIGHT - offset);
+    };
+
+    const animatedStyle = useAnimatedStyle(() => {
+        return {
+            transform: [{
+                translateY: withTiming(YValue.value, animationConfig)
+            }]
+        };
+    });
 
     const dismissModal = () => setVisible(false);
 
@@ -62,11 +87,7 @@ const Content = ({ }: ContentProps) => {
                             width='100%'
                             preserveAspectRatio='xMinYMin slice'
                         />
-                        <View style={[styles.overlay, {
-                            transform: [{
-                                translateY: offsetY
-                            }]
-                        }]} />
+                        <Animated.View style={[styles.overlay, animatedStyle]} />
                     </View>
 
                     <Button
