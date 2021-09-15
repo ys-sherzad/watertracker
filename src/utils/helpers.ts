@@ -12,23 +12,7 @@ export const mililiterToLiter = (value: number) => {
 /**
  * Fixes to 2 decimal numbers
  * @param num 
- * @returns fixed decimal
+ * @returns number
  */
-export const toFixed = (num: number) => {
-    if (Math.abs(num) < 1.0) {
-        var e = parseInt(num.toString().split('e-')[1]);
-        if (e) {
-            num *= Math.pow(10, e - 1);
-            num = Number('0.' + (new Array(e)).join('0') + num.toString().substring(2));
-        }
-    } else {
-        var e = parseInt(num.toString().split('+')[1]);
-        if (e > 20) {
-            e -= 20;
-            num /= Math.pow(10, e);
-            num += Number((new Array(e + 1)).join('0'));
-        }
-    }
-    return num;
-};
+export const toFixed = (num: number) => Number(num.toString().match(/^\d+(?:\.\d{0,2})?/));
 
