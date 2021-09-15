@@ -5,9 +5,8 @@ import Footer from '../components/Footer.component';
 import Header from '../components/Header.component';
 import SwipeDetector from '../components/SwipeDetector.component';
 
-interface MainProps { }
 
-const Main = (props: MainProps) => {
+const Main = () => {
     return (
         <View style={styles.container}>
             <SwipeDetector>

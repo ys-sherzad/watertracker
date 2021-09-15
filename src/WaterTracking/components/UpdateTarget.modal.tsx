@@ -31,8 +31,6 @@ const UpdateTarget = ({
             onBackButtonPress={onDismiss}
             hideModalContentWhileAnimating={true}
             useNativeDriver={true}
-        // deviceHeight={height}
-        // deviceWidth={width}
         >
             <View style={styles.container}>
                 <Text style={styles.title}>{constants.update_target_water}</Text>
@@ -132,5 +130,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
         paddingHorizontal: 14
     },
-
 });

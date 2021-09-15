@@ -5,9 +5,8 @@ import { useStore } from '../../provider/StoreContext';
 import { Helpers } from '../../utils';
 import Label from './Label.component';
 
-interface HeaderProps { }
 
-const Header = (props: HeaderProps) => {
+const Header = () => {
     const { store } = useStore();
     return (
         <View style={styles.container}>

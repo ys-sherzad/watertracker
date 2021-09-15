@@ -14,7 +14,7 @@ const Label = ({
     unit
 }: LabelProps) => {
     return (
-        <View style={styles.container}>
+        <View>
             <Text style={styles.value}>{value} {unit ?? ''}</Text>
             <Text style={styles.desc}>{description.toUpperCase()}</Text>
         </View>
@@ -24,9 +24,6 @@ const Label = ({
 export default Label;
 
 const styles = StyleSheet.create({
-    container: {
-        // backgroundColor: 'yellow'
-    },
     value: {
         textAlign: 'center',
         fontSize: 28,

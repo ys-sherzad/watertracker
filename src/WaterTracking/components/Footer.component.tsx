@@ -11,9 +11,7 @@ import { levels } from '../../store/data';
 
 const ICON_SIZE = 55;
 
-interface FooterProps { }
-
-const Footer = (props: FooterProps) => {
+const Footer = () => {
     const { store, dispatch } = useStore();
 
     const renderLevels = () => (
@@ -84,12 +82,5 @@ const styles = StyleSheet.create({
     },
     btn: {
         borderRadius: 99
-
-
-
-
-
-
-
     }
 });
