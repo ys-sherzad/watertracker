@@ -8,6 +8,7 @@ interface Props extends TextProps {
 const Text = (props: Props) => {
     return (
         <RNText
+            {...props}
             style={[styles.defaultTextStyle, props.style]}
         >
             {props.children}
