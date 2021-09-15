@@ -28,7 +28,6 @@ const Content = ({ }: ContentProps) => {
     const [visible, setVisible] = useState(false);
     const [offsetY, setOffsetY] = useState(OVERLAY_HEIGHT);
 
-
     useEffect(() => {
         const { totalWaterDrunk, target } = store;
 
@@ -37,7 +36,6 @@ const Content = ({ }: ContentProps) => {
 
         setOffsetY(OVERLAY_HEIGHT - offsetY);
     }, [store.totalWaterDrunk]);
-
 
     const dismissModal = () => setVisible(false);
 

@@ -18,32 +18,34 @@ type GestureEvent =
     HandlerStateChangeEvent<FlingGestureHandlerEventPayload>;
 
 enum SwipeDirection {
-    LEFT,
-    RIGHT
+    LEFT = '+',
+    RIGHT = '-'
 }
+
+const operations = {
+    '+': (a: number, b: number) => a + b,
+    '-': (a: number, b: number) => a - b
+};
+
 
 const SwipeDetector = ({
     children
 }: SwipeDetectorProps) => {
     const { store, dispatch } = useStore();
 
-    const changeSelectedValue = (direction: SwipeDirection) => {
+    const changeSelectedValue = (operator: SwipeDirection) => {
         const { selectedValueIndex } = store;
-        if (direction === SwipeDirection.LEFT) {
-            if (selectedValueIndex !== 2) {
-                dispatch(selectWaterValue(selectedValueIndex + 1));
-            } else {
-                dispatch(selectWaterValue(0));
-            }
+
+        let nextIndex = operations[operator](selectedValueIndex, 1);
+
+        if (nextIndex > 2) {
+            nextIndex = 2;
+        }
+        if (nextIndex < 0) {
+            nextIndex = 0;
         }
 
-        if (direction === SwipeDirection.RIGHT) {
-            if (selectedValueIndex !== 0) {
-                dispatch(selectWaterValue(selectedValueIndex - 1));
-            } else {
-                dispatch(selectWaterValue(2));
-            }
-        }
+        dispatch(selectWaterValue(nextIndex));
     };
 
     const handleRightSwipe = ({ nativeEvent }: GestureEvent) => {
