@@ -38,38 +38,26 @@ const SwipeDetector = ({
 
         let nextIndex = operations[operator](selectedValueIndex, 1);
 
-        if (nextIndex > 2) {
-            nextIndex = 2;
+        if (nextIndex > 2 || nextIndex < 0) {
+            return;
         }
-        if (nextIndex < 0) {
-            nextIndex = 0;
-        }
-
         dispatch(selectWaterValue(nextIndex));
     };
 
-    const handleRightSwipe = ({ nativeEvent }: GestureEvent) => {
+    const handleSwipe = ({ nativeEvent }: GestureEvent, direction: SwipeDirection) => {
         if (nativeEvent.state === State.END) {
-            console.log('SWIPED RIGHT');
-            changeSelectedValue(SwipeDirection.RIGHT);
-        }
-    };
-
-    const handleLeftSwipe = ({ nativeEvent }: GestureEvent) => {
-        if (nativeEvent.state === State.END) {
-            console.log('SWIPED LEFT');
-            changeSelectedValue(SwipeDirection.LEFT);
+            changeSelectedValue(direction);
         }
     };
 
     return (
         <FlingGestureHandler
             direction={Directions.RIGHT}
-            onHandlerStateChange={handleRightSwipe}
+            onHandlerStateChange={(e) => handleSwipe(e, SwipeDirection.RIGHT)}
         >
             <FlingGestureHandler
                 direction={Directions.LEFT}
-                onHandlerStateChange={handleLeftSwipe}
+                onHandlerStateChange={(e) => handleSwipe(e, SwipeDirection.LEFT)}
             >
                 <View style={styles.container}>
                     {children}
