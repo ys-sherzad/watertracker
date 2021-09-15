@@ -43,13 +43,15 @@ const UpdateTarget = ({
 
                 <Spacer size={30} />
 
-                <TextInput
-                    value={newTarget}
-                    placeholder='ml'
-                    onChangeText={(text) => setNewTarget(text)}
-                    keyboardType='numeric'
-                    style={styles.input}
-                />
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        value={newTarget}
+                        onChangeText={(text) => setNewTarget(text)}
+                        keyboardType='numeric'
+                        style={styles.input}
+                    />
+                    <Text style={styles.ml}>ml</Text>
+                </View>
 
                 <Spacer size={12} />
 
@@ -75,7 +77,6 @@ export default UpdateTarget;
 const styles = StyleSheet.create({
     container: {
         width: 260,
-        paddingHorizontal: 30,
         paddingVertical: 36,
         backgroundColor: 'white',
         alignSelf: 'center',
@@ -93,13 +94,23 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: 'center'
     },
-    input: {
+    inputContainer: {
+        width: 210,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 8,
         borderWidth: 1,
-        borderColor: '#53BFEF',
+        borderColor: Theme.primary,
+        alignSelf: 'center'
+    },
+    input: {
+        flex: 1,
         padding: 8,
-        borderRadius: 8
+        color: Theme.primary
     },
     updateBtn: {
+        width: 210,
+        alignSelf: 'center',
         backgroundColor: Theme.primary,
         borderRadius: 8,
         paddingVertical: 8,
@@ -113,6 +124,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 2,
         right: 2,
-        padding: 5
-    }
+        padding: 5,
+        borderRadius: 99
+    },
+    ml: {
+        color: Theme.primary,
+        fontSize: 16,
+        paddingHorizontal: 14
+    },
+
 });
