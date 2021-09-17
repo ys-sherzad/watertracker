@@ -4,7 +4,7 @@ import { ActionType, AppAction, State } from "./types";
 export const initialState: State = {
     totalWaterDrunk: 0,
     target: 3500,
-    selectedValueIndex: 1
+    selectedIndex: 1
 };
 
 export const reducer = (state: State, action: AppAction) => {
@@ -24,13 +24,13 @@ export const reducer = (state: State, action: AppAction) => {
         case ActionType.SELECT_WATER_VALUE:
             return {
                 ...state,
-                selectedValueIndex: action.payload,
+                selectedIndex: action.payload,
             };
         case ActionType.INCREMENT:
             return {
                 ...state,
                 totalWaterDrunk: function () {
-                    const total = state.totalWaterDrunk + levels[state.selectedValueIndex];
+                    const total = state.totalWaterDrunk + levels[state.selectedIndex];
                     if (total > state.target) {
                         return state.target;
                     }
@@ -41,7 +41,7 @@ export const reducer = (state: State, action: AppAction) => {
             return {
                 ...state,
                 totalWaterDrunk: function () {
-                    const total = state.totalWaterDrunk - levels[state.selectedValueIndex];
+                    const total = state.totalWaterDrunk - levels[state.selectedIndex];
                     if (total < 0) {
                         return 0;
                     }

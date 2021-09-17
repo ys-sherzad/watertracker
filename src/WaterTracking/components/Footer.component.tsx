@@ -18,7 +18,7 @@ const Footer = () => {
         <View style={styles.levelsContainer}>
             {levels.map((value, index) => {
                 const hasSpacer = levels.length - 1 !== index;
-                const isSelected = index === store.selectedValueIndex;
+                const isSelected = index === store.selectedIndex;
                 return (
                     <React.Fragment key={value}>
                         <Button

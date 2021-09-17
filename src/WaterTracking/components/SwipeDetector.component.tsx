@@ -34,9 +34,9 @@ const SwipeDetector = ({
     const { store, dispatch } = useStore();
 
     const changeSelectedValue = (operator: SwipeDirection) => {
-        const { selectedValueIndex } = store;
+        const { selectedIndex } = store;
 
-        const nextIndex = operations[operator](selectedValueIndex, 1);
+        const nextIndex = operations[operator](selectedIndex, 1);
 
         if (nextIndex > 2 || nextIndex < 0) {
             return;
