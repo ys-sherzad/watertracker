@@ -1,5 +1,5 @@
 import { State } from 'react-native-gesture-handler';
-import { action, createAction } from 'typesafe-actions';
+import { createAction } from 'typesafe-actions';
 import * as ActionTypes from './action-types';
 
 /**
@@ -7,7 +7,6 @@ import * as ActionTypes from './action-types';
  * @param target number
  * @returns action
  */
-// export const setWaterTarget = (target: number) => action(ActionTypes.SET_WATER_TARGET, { target });
 export const setWaterTarget = createAction(ActionTypes.SET_WATER_TARGET)<{ target: number; }>();
 
 /**
@@ -15,7 +14,6 @@ export const setWaterTarget = createAction(ActionTypes.SET_WATER_TARGET)<{ targe
  * @param selectedIndex number
  * @returns action
  */
-// export const selectWaterValue = (selectedIndex: number) => action(ActionTypes.SELECT_WATER_VALUE, { selectedIndex });
 export const selectWaterValue = createAction(ActionTypes.SELECT_WATER_VALUE)<{ selectedIndex: number; }>();
 
 
@@ -23,7 +21,6 @@ export const selectWaterValue = createAction(ActionTypes.SELECT_WATER_VALUE)<{ s
  * Increment water
  * @returns action
  */
-// export const increment = () => action(ActionTypes.INCREMENT);
 export const increment = createAction(ActionTypes.INCREMENT)();
 
 
@@ -31,7 +28,6 @@ export const increment = createAction(ActionTypes.INCREMENT)();
  * Decrement water
  * @returns action
  */
-// export const decrement = () => action(ActionTypes.DECREMENT);
 export const decrement = createAction(ActionTypes.DECREMENT)();
 
 
@@ -40,5 +36,4 @@ export const decrement = createAction(ActionTypes.DECREMENT)();
  * @param persistedState State
  * @returns action
  */
-// export const rehydrate = (persistedState: State) => action(ActionTypes.REHYDRATE, { persistedState });
 export const rehydrate = createAction(ActionTypes.REHYDRATE)<{ persistedState: State; }>();
