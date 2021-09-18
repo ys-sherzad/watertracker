@@ -1,5 +1,6 @@
 import React from 'react';
-import { AppAction, State } from '../store/types';
+import { AppAction } from '../store/reducer';
+import { State } from '../store/types';
 
 type ContextProps = {
     store: State;

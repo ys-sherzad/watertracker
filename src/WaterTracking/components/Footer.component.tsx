@@ -23,7 +23,7 @@ const Footer = () => {
                     <React.Fragment key={value}>
                         <Button
                             style={{ padding: 8, borderRadius: 5 }}
-                            onPress={() => dispatch(selectWaterValue(index))}
+                            onPress={() => dispatch(selectWaterValue({ selectedIndex: index }))}
                         >
                             <Text style={[styles.level, !isSelected && { color: Theme.inactive }]}>
                                 {levels[index]} ml

@@ -1,36 +1,44 @@
-import { createAction } from "./createAction";
-import {
-    ActionType,
-    DecrementAction,
-    IncrementAction,
-    RehydrateAction,
-    SelectWaterValueAction,
-    SetTargetAction,
-    State
-} from "./types";
+import { State } from 'react-native-gesture-handler';
+import { action, createAction } from 'typesafe-actions';
+import * as ActionTypes from './action-types';
 
 /**
- * @param value number
+ * Set water target
+ * @param target number
  * @returns action
  */
-export const setWaterTarget = (value: number): SetTargetAction =>
-    createAction(ActionType.SET_WATER_TARGET, value);
+// export const setWaterTarget = (target: number) => action(ActionTypes.SET_WATER_TARGET, { target });
+export const setWaterTarget = createAction(ActionTypes.SET_WATER_TARGET)<{ target: number; }>();
 
 /**
- * @param value number
+ * Select water level
+ * @param selectedIndex number
  * @returns action
  */
-export const selectWaterValue = (value: number): SelectWaterValueAction =>
-    createAction(ActionType.SELECT_WATER_VALUE, value);
+// export const selectWaterValue = (selectedIndex: number) => action(ActionTypes.SELECT_WATER_VALUE, { selectedIndex });
+export const selectWaterValue = createAction(ActionTypes.SELECT_WATER_VALUE)<{ selectedIndex: number; }>();
 
 
-// TODO: payload should be optional
-// passing undefined at the moment   
-export const increment = (): IncrementAction =>
-    createAction(ActionType.INCREMENT, undefined);
+/**
+ * Increment water
+ * @returns action
+ */
+// export const increment = () => action(ActionTypes.INCREMENT);
+export const increment = createAction(ActionTypes.INCREMENT)();
 
-export const decrement = (): DecrementAction =>
-    createAction(ActionType.DECREMENT, undefined);
 
-export const rehydrate = (state: State): RehydrateAction =>
-    createAction(ActionType.REHYDRATE, state);
+/**
+ * Decrement water
+ * @returns action
+ */
+// export const decrement = () => action(ActionTypes.DECREMENT);
+export const decrement = createAction(ActionTypes.DECREMENT)();
+
+
+/**
+ * Reydrate store
+ * @param persistedState State
+ * @returns action
+ */
+// export const rehydrate = (persistedState: State) => action(ActionTypes.REHYDRATE, { persistedState });
+export const rehydrate = createAction(ActionTypes.REHYDRATE)<{ persistedState: State; }>();

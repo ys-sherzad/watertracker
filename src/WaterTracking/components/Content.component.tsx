@@ -69,7 +69,7 @@ const Content = ({ }: ContentProps) => {
      * @param value string
      */
     const updateTargetValue = (value: string) => {
-        dispatch(setWaterTarget(Number(value)));
+        dispatch(setWaterTarget({ target: Number(value) }));
         dismissModal();
     };
 

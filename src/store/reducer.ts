@@ -1,5 +1,9 @@
 import { levels } from "./data";
-import { ActionType, AppAction, State } from "./types";
+import { State } from "./types";
+import { ActionType, getType } from 'typesafe-actions';
+import * as Actions from './actions';
+
+export type AppAction = ActionType<typeof Actions>;
 
 export const initialState: State = {
     totalWaterDrunk: 0,
@@ -9,24 +13,26 @@ export const initialState: State = {
 
 export const reducer = (state: State, action: AppAction) => {
     switch (action.type) {
-        case ActionType.SET_WATER_TARGET:
-            if (action.payload < state.totalWaterDrunk) {
+        case getType(Actions.setWaterTarget):
+            const { target } = action.payload;
+            if (target < state.totalWaterDrunk) {
                 return {
                     ...state,
-                    target: action.payload,
-                    totalWaterDrunk: action.payload
+                    target,
+                    totalWaterDrunk: target
                 };
             }
             return {
                 ...state,
-                target: action.payload
+                target
             };
-        case ActionType.SELECT_WATER_VALUE:
+        case getType(Actions.selectWaterValue):
+            const { selectedIndex } = action.payload;
             return {
                 ...state,
-                selectedIndex: action.payload,
+                selectedIndex
             };
-        case ActionType.INCREMENT:
+        case getType(Actions.increment):
             return {
                 ...state,
                 totalWaterDrunk: function () {
@@ -37,7 +43,7 @@ export const reducer = (state: State, action: AppAction) => {
                     return total;
                 }()
             };
-        case ActionType.DECREMENT:
+        case getType(Actions.decrement):
             return {
                 ...state,
                 totalWaterDrunk: function () {
@@ -48,8 +54,9 @@ export const reducer = (state: State, action: AppAction) => {
                     return total;
                 }()
             };
-        case ActionType.REHYDRATE:
-            return action.payload;
+        case getType(Actions.rehydrate):
+            const { persistedState } = action.payload;
+            return { ...state, persistedState };
         default:
             return state;
     }
