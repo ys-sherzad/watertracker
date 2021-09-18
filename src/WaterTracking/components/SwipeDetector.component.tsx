@@ -41,7 +41,7 @@ const SwipeDetector = ({
         if (nextIndex > 2 || nextIndex < 0) {
             return;
         }
-        dispatch(selectWaterValue(nextIndex));
+        dispatch(selectWaterValue({ selectedIndex: nextIndex }));
     };
 
     const handleSwipe = ({ nativeEvent }: GestureEvent, direction: SwipeDirection) => {

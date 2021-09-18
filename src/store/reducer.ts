@@ -56,7 +56,7 @@ export const reducer = (state: State, action: AppAction) => {
             };
         case getType(Actions.rehydrate):
             const { persistedState } = action.payload;
-            return { ...state, persistedState };
+            return { ...state, ...persistedState };
         default:
             return state;
     }

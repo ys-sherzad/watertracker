@@ -13,7 +13,7 @@ const useStartup = () => {
         const rehydrateStore = async () => {
             const store = await AsyncStorage.getItem(STORE_KEY);
             if (store) {
-                dispatch(rehydrate(JSON.parse(store)));
+                dispatch(rehydrate({ persistedState: JSON.parse(store) }));
             }
             setIsLoading(false);
         };
