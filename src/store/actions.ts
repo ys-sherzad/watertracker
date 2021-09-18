@@ -1,6 +1,6 @@
-import { State } from 'react-native-gesture-handler';
 import { createAction } from 'typesafe-actions';
 import * as ActionTypes from './action-types';
+import { State } from './types';
 
 /**
  * Set water target
