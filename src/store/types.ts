@@ -9,18 +9,18 @@ export enum ActionType {
     REHYDRATE = 'store/rehydrate'
 }
 
-type SetTargetAction = Action<typeof ActionType.SET_WATER_TARGET, number>;
-type SelectWaterValueAction = Action<typeof ActionType.SELECT_WATER_VALUE, number>;
-type Increment = Action<typeof ActionType.INCREMENT, undefined>;
-type Decrement = Action<typeof ActionType.DECREMENT, undefined>;
-type Rehydrate = Action<typeof ActionType.REHYDRATE, State>;
+export type SetTargetAction = Action<typeof ActionType.SET_WATER_TARGET, number>;
+export type SelectWaterValueAction = Action<typeof ActionType.SELECT_WATER_VALUE, number>;
+export type IncrementAction = Action<typeof ActionType.INCREMENT, undefined>;
+export type DecrementAction = Action<typeof ActionType.DECREMENT, undefined>;
+export type RehydrateAction = Action<typeof ActionType.REHYDRATE, State>;
 
 export type AppAction =
     | SetTargetAction
     | SelectWaterValueAction
-    | Increment
-    | Decrement
-    | Rehydrate;
+    | IncrementAction
+    | DecrementAction
+    | RehydrateAction;
 
 export interface State {
     totalWaterDrunk: number;
